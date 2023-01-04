@@ -37,9 +37,6 @@ const timer = (deadline) => {
         if (getTime.timeRemaining === 0) {
             clearInterval(updateInt);
         }
-
-        console.log(getTime.timeRemaining);
-
     };
 
     let updateInt = setInterval(updateClock, 1000);
