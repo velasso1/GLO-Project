@@ -9,12 +9,20 @@ const timer = (deadline) => {
         let dateStop = new Date(deadline).getTime();
         let dateNow = new Date().getTime();
         let timeRemaining = (dateStop - dateNow) / 1000;
-        // let days = Math.floor(timeRemaining / 60 / 60 / 24);
-        // let hours = Math.floor((timeRemaining / 60 / 60) % 24);
         let hours = Math.floor(timeRemaining / 60 / 60);
         let minutes = Math.floor((timeRemaining / 60) % 60);
         let seconds = Math.floor(timeRemaining % 60);
 
+        hours = hours.toString().padStart(2, '0');
+        minutes = minutes.toString().padStart(2, '0');
+        seconds = seconds.toString().padStart(2, '0');
+
+        if (dateStop < dateNow) {
+            clearInterval(updateInt);
+            hours = '00';
+            minutes = '00';
+            seconds = '00';
+        }
 
         return { timeRemaining, hours, minutes, seconds };
     };
@@ -26,12 +34,15 @@ const timer = (deadline) => {
         timerMinutes.textContent = getTime.minutes;
         timerSeconds.textContent = getTime.seconds;
 
-        if (getTime.timeRemaining > 0) {
-            setTimeout(updateClock, 1000);
+        if (getTime.timeRemaining === 0) {
+            clearInterval(updateInt);
         }
 
+        console.log(getTime.timeRemaining);
+
     };
-    updateClock();
+
+    let updateInt = setInterval(updateClock, 1000);
 
 };
 
