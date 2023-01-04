@@ -1,0 +1,1 @@
+(()=>{"use strict";console.log("It's a first module"),console.log("It's a second module")})();
