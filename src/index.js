@@ -1,8 +1,8 @@
 'use strict';
 
-import first from './modules/one';
+import timer from './modules/timer';
 import second from './modules/two';
 
 
-first();
+timer('7 january 2023');
 second();
