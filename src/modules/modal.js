@@ -13,7 +13,6 @@ const modal = () => {
         popup.style.left = '-200px';
         popup.style.transform = `translateX(${count}px)`;
         modal.style.display = 'block';
-        // modal.style.opacity = `${count / 7.5}%`;
 
         if (count >= clientWidth / 2) {
             cancelAnimationFrame(animation);
