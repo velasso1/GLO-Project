@@ -4,7 +4,6 @@ const timer = (deadline) => {
     const timerHours = document.querySelector('#timer-hours');
     const timerMinutes = document.querySelector('#timer-minutes');
     const timerSeconds = document.querySelector('#timer-seconds');
-    let updateInt;
 
     const getTimeRemaining = () => {
         let dateStop = new Date(deadline).getTime();
@@ -35,14 +34,13 @@ const timer = (deadline) => {
         timerMinutes.textContent = getTime.minutes;
         timerSeconds.textContent = getTime.seconds;
 
-        updateInt = setInterval(updateClock, 1000);
-
         if (getTime.timeRemaining === 0) {
             clearInterval(updateInt);
         }
     };
 
     updateClock();
+    let updateInt = setInterval(updateClock, 1000);
 
 };
 
