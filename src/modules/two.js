@@ -1,9 +1,9 @@
 'use strict';
 
-const secondModule = () => {
+const menu = () => {
     const second = "It's a second module";
 
     console.log(second);
 };
 
-export default secondModule;
+export default menu;
