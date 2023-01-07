@@ -1,9 +1,18 @@
 'use strict';
 
 const menu = () => {
-    const second = "It's a second module";
+    const menuBtn = document.querySelector('.menu');
+    const menu = document.querySelector('menu');
+    const closeBtn = menu.querySelector('.close-btn');
+    const menuItems = menu.querySelectorAll('ul>li>a');
 
-    console.log(second);
+    const handleMenu = function () {
+        menu.classList.toggle('active-menu');
+    };
+
+    menuItems.forEach(menuItem => menuItem.addEventListener('click', handleMenu));
+    menuBtn.addEventListener('click', handleMenu);
+    closeBtn.addEventListener('click', handleMenu);
 };
 
 export default menu;
