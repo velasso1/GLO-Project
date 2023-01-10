@@ -17,6 +17,8 @@ const slider = () => {
             dot.classList.add('dot');
             dotList.append(dot);
         }
+        dots = document.querySelectorAll('.dot');
+        dots[0].classList.add('dot-active');
     };
 
     const nextSlide = function (elems, index, strClass) {
@@ -28,7 +30,6 @@ const slider = () => {
     };
 
     const autoSlide = function () {
-        dots = document.querySelectorAll('.dot');
         prevSlide(slides, currentSlide, 'portfolio-item-active');
         prevSlide(dots, currentSlide, 'dot-active');
 
