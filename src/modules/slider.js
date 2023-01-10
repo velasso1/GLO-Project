@@ -17,6 +17,7 @@ const slider = () => {
             dot.classList.add('dot');
             dotList.append(dot);
         }
+
         dots = document.querySelectorAll('.dot');
         dots[0].classList.add('dot-active');
     };
@@ -101,7 +102,6 @@ const slider = () => {
 
     addDots();
     startSlide(timeInterval);
-
 };
 
 export default slider;
