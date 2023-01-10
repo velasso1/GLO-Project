@@ -1,3 +1,5 @@
+'use strict';
+
 const modal = () => {
     const modal = document.querySelector('.popup');
     const popup = document.querySelector('.popup-content');
