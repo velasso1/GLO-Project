@@ -5,6 +5,6 @@ import menu from './modules/menu';
 import modal from './modules/modal';
 
 
-timer('9 january 2023');
+timer('19 january 2023');
 menu();
 modal(); 
