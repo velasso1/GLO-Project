@@ -1,5 +1,7 @@
 'use strict';
 
+import { animate } from './helpers';
+
 const modal = () => {
     const modal = document.querySelector('.popup');
     const popup = document.querySelector('.popup-content');
@@ -8,27 +10,24 @@ const modal = () => {
 
     let count = 0;
 
-    const animation = function () {
-        count += 21;
-
-        popup.style.left = '-200px';
-        popup.style.transform = `translateX(${count}px)`;
-        modal.style.display = 'block';
-
-        if (count >= clientWidth / 2) {
-            cancelAnimationFrame(animation);
-            count = 0;
-        } else {
-            requestAnimationFrame(animation);
-        }
-    };
 
     buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
             if (clientWidth < 768) {
                 modal.style.display = 'block';
             } else {
-                animation();
+                popup.style.left = '-300px';
+                animate({
+                    duration: 800,
+                    timing(timeFraction) {
+                        return timeFraction;
+                    },
+                    draw(progress) {
+                        modal.style.display = 'block';
+                        popup.style.transform = `translateX(${progress * 210}%)`;
+                        modal.style.width = progress * 100 + '%';
+                    }
+                });
             }
         });
     });
