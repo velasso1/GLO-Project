@@ -8,9 +8,6 @@ const modal = () => {
     const buttons = document.querySelectorAll('.popup-btn');
     let clientWidth = document.documentElement.clientWidth;
 
-    let count = 0;
-
-
     buttons.forEach((btn) => {
         btn.addEventListener('click', () => {
             if (clientWidth < 768) {
