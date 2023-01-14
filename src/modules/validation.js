@@ -25,7 +25,9 @@ const validation = () => {
 
     formPhone.forEach(function (form) {
         form.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^0-9()-]/, '');
+            e.target.value = e.target.value.replace(/[^0-9()+\-]/, '');
+            e.target.value = e.target.value.replace(/\*/, '');
+
         });
     });
 
@@ -37,12 +39,12 @@ const validation = () => {
 
     formName.forEach(function (form) {
         form.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^а-яА-Я- ]/, '');
+            e.target.value = e.target.value.replace(/[^а-яА-Я0-9a-z? !]/, '');
         });
     });
 
     mess.addEventListener('input', (e) => {
-        e.target.value = e.target.value.replace(/[^а-яА-Я- ]/, '');
+        e.target.value = e.target.value.replace(/[^а-яА-Я?!,. ]/, '');
     });
 
 

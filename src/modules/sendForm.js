@@ -4,17 +4,58 @@ const sendForm = ({ formId, someElem = [] }) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
     const loadText = 'Загрузка...';
-    const errorText = 'Ошибка..';
+    const errorText = 'Ошибка';
     const successText = 'Спасибо! Наш менеджер с Вами свяжется.';
 
     const validate = (list) => {
+        const phoneReg = /[0-9()+\-]/;
+        const nameReg = /[А-Яа-я]/;
+        const messReg = /[а-яА-Я0-9!?,./-]/;
+        const emailReg = /[a-zA-Z0-9@-_.!~*']/;
+
         let success = true;
 
-        // list.forEach(input => {
-        //     if (!input.classList.contains('success')) {
-        //         success = false;
-        //     }
-        // });
+        list.forEach(input => {
+
+            switch (true) {
+                case input.getAttribute('name') === 'user_phone':
+                    if (phoneReg.test(input.value)) {
+                        input.classList.add('success');
+                    } else {
+                        input.classList.add('failure');
+                    }
+                    break;
+
+                case input.getAttribute('name') === 'user_name':
+                    if (nameReg.test(input.value)) {
+                        input.classList.add('success');
+                    } else {
+                        input.classList.add('failure');
+                    }
+                    break;
+
+                case input.getAttribute('name') === 'user_message':
+                    if (messReg.test(input.value)) {
+                        input.classList.add('success');
+                    } else {
+                        input.classList.add('failure');
+                    }
+                    break;
+
+                case input.getAttribute('name') === 'user_email':
+                    if (emailReg.test(input.value)) {
+                        input.classList.add('success');
+                    } else {
+                        input.classList.add('failure');
+                    }
+                    break;
+            }
+
+            if (!input.classList.contains('success')) {
+                success = false;
+            }
+
+        });
 
         return success;
     };
