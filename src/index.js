@@ -17,4 +17,12 @@ validation();
 tabs();
 slider();
 calc(100);
-sendForm();
+sendForm({
+    formId: 'form1',
+    someElem: [
+        {
+            type: 'block',
+            id: 'total',
+        }
+    ]
+});
