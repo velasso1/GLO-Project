@@ -1,5 +1,7 @@
 'use strict';
 
+import validator from "./validator";
+
 const sendForm = ({ formId, someElem = [] }) => {
     const form = document.getElementById(formId);
     const statusBlock = document.createElement('div');
@@ -7,54 +9,20 @@ const sendForm = ({ formId, someElem = [] }) => {
     const errorText = 'Ошибка';
     const successText = 'Спасибо! Наш менеджер с Вами свяжется.';
 
+    form.querySelectorAll('input').forEach(input => {
+        input.removeAttribute('required');
+    });
+
     const validate = (list) => {
-        const phoneReg = /[0-9()+\-]/;
-        const nameReg = /[А-Яа-я]/;
-        const messReg = /[а-яА-Я0-9!?,./-]/;
-        const emailReg = /[a-zA-Z0-9@-_.!~*']/;
 
         let success = true;
 
+        validator(list);
+
+
+
         list.forEach(input => {
-
-            switch (true) {
-                case input.getAttribute('name') === 'user_phone':
-                    if (phoneReg.test(input.value)) {
-                        input.classList.add('success');
-                    } else {
-                        input.classList.add('failure');
-                    }
-                    break;
-
-                case input.getAttribute('name') === 'user_name':
-                    if (nameReg.test(input.value)) {
-                        input.classList.add('success');
-                    } else {
-                        input.classList.add('failure');
-                    }
-                    break;
-
-                case input.getAttribute('name') === 'user_message':
-                    if (messReg.test(input.value)) {
-                        input.classList.add('success');
-                    } else {
-                        input.classList.add('failure');
-                    }
-                    break;
-
-                case input.getAttribute('name') === 'user_email':
-                    if (emailReg.test(input.value)) {
-                        input.classList.add('success');
-                    } else {
-                        input.classList.add('failure');
-                    }
-                    break;
-            }
-
-            if (!input.classList.contains('success')) {
-                success = false;
-            }
-
+            if (input.classList.contains('error')) { success = false; }
         });
 
         return success;
@@ -67,7 +35,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             headers: {
                 'Content-type': 'application/json'
             }
-        }).then(response => response.json());
+        }).then(res => res.json());
     };
 
     const submitForm = () => {
@@ -78,16 +46,21 @@ const sendForm = ({ formId, someElem = [] }) => {
         statusBlock.textContent = loadText;
         form.append(statusBlock);
 
-        formData.forEach((value, key) => {
-            formBody[key] = value;
+        formData.forEach((val, key) => {
+            if (key === "user_message" && val === "") {
+                return;
+            } else {
+                formBody[key] = val;
+            }
+
         });
 
         someElem.forEach(elem => {
             const element = document.getElementById(elem.id);
 
-            if (elem.type === 'block') {
+            if (elem.type === 'block' && element.textContent != 0) {
                 formBody[elem.id] = element.textContent;
-            } else if (elem.type === 'input') {
+            } else if (elem.type === 'input' && element.value != "") {
                 formBody[elem.id] = element.value;
             }
         });
@@ -97,6 +70,10 @@ const sendForm = ({ formId, someElem = [] }) => {
                 .then(data => {
                     statusBlock.textContent = successText;
 
+                    setTimeout(() => {
+                        statusBlock.remove();
+                    }, 3000);
+
                     formElements.forEach(input => {
                         input.value = '';
                     });
@@ -105,7 +82,12 @@ const sendForm = ({ formId, someElem = [] }) => {
                     statusBlock.textContent = errorText;
                 });
         } else {
-            alert('Данные не валидны');
+            statusBlock.style.color = 'white';
+            statusBlock.textContent = 'Некорректный ввод';
+
+            setTimeout(() => {
+                statusBlock.remove();
+            }, 3000);
         }
     };
 

@@ -24,3 +24,5 @@ const animate = function ({ timing, draw, duration }) {
 };
 
 export { animate };
+
+

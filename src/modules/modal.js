@@ -13,7 +13,8 @@ const modal = () => {
             if (clientWidth < 768) {
                 modal.style.display = 'block';
             } else {
-                popup.style.left = '-300px';
+                // popup.style.left = '0';
+                popup.style.transform = 'translateX(-150%)';
                 animate({
                     duration: 800,
                     timing(timeFraction) {
@@ -21,7 +22,8 @@ const modal = () => {
                     },
                     draw(progress) {
                         modal.style.display = 'block';
-                        popup.style.transform = `translateX(${progress * 210}%)`;
+                        popup.style.transform = `translateX(-${150 - progress * 135}%)`;
+                        popup.style.left = `${50 * progress}`;
                         modal.style.width = progress * 100 + '%';
                     }
                 });
