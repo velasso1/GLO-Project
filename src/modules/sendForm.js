@@ -19,8 +19,6 @@ const sendForm = ({ formId, someElem = [] }) => {
 
         validator(list);
 
-
-
         list.forEach(input => {
             if (input.classList.contains('error')) { success = false; }
         });
