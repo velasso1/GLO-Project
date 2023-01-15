@@ -13,6 +13,7 @@ const validator = (items) => {
                     break;
                 } else {
                     item.style.border = '';
+                    item.classList.remove("error");
                 }
                 return;
 
@@ -22,6 +23,7 @@ const validator = (items) => {
                     break;
                 } else {
                     item.style.border = '';
+                    item.classList.remove("error");
                 }
                 return;
 
@@ -35,6 +37,7 @@ const validator = (items) => {
                     break;
                 } else {
                     item.style.border = '';
+                    item.classList.remove("error");
                 }
                 return;
 

@@ -1,5 +1,7 @@
 'use strict';
 
+import validator from './validator';
+
 const validation = () => {
     const calcSquare = document.querySelector('.calc-square');
     const calcCount = document.querySelector('.calc-count');
@@ -27,19 +29,21 @@ const validation = () => {
         form.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^0-9()+\-]/, '');
             e.target.value = e.target.value.replace(/\*/, '');
-
+            form.classList.contains('error') && validator([form]);
         });
     });
 
     formEmail.forEach(function (form) {
         form.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^a-zA-Z0-9@-_.!~*']/, '');
+            form.classList.contains('error') && validator([form]);
         });
     });
 
     formName.forEach(function (form) {
         form.addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[^а-яА-Я0-9a-z? !]/, '');
+            form.classList.contains('error') && validator([form]);
         });
     });
 
